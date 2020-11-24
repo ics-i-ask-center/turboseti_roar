@@ -50,7 +50,7 @@ From: debian:9
     conda install -c conda-forge notebook -y
 
     ## Install blimpy using pip
-    pip install -U https://github.com/UCBerkeleySETI/blimpy
+    python3 -m pip install -U https://github.com/UCBerkeleySETI/blimpy
 
     ## Install turbo_seti
     git clone https://github.com/UCBerkeleySETI/turbo_seti.git
