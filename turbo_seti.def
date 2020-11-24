@@ -17,7 +17,7 @@ From: debian:9
 
     ## Install miniconda3
     if [ ! -d /usr/local/miniconda3 ]; then
-        wget http://10.1.10.2/sh_installers/miniconda3/miniconda3-4.8.4-linux-x86_64.sh \
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
             -O ~/miniconda3.sh && \
         bash ~/miniconda3.sh -b -p /usr/local/miniconda && \
         rm -rf ~/miniconda3
