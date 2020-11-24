@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Create "modules/modules" directory if it doesn't exist
+# Create "turbo_seti/modules" directory if it doesn't exist
 if [ ! -d ${HOME}/work/sw/modules/turbo_seti ]; then
     mkdir -p ${HOME}/work/sw/modules/turbo_seti
 fi
 
-# Create "rstudio" directory if it doesn't exist
+# Create "turbo_seti" directory if it doesn't exist
 if [ ! -d ${HOME}/work/sw/turbo_seti ]; then
     mkdir -p ${HOME}/work/sw/turbo_seti
 fi
 
-# Copy hlg5155_rstudio.sif and local.lua to
+# Copy turbo_seti.sif and local.lua to
 # respective locations
 cp turbo_seti_latest.sif ${HOME}/work/sw/turbo_seti/turbo_seti_latest.sif
 cp local.lua ${HOME}/work/sw/modules/turbo_seti/local.lua
