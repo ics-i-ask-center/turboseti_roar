@@ -1,0 +1,17 @@
+BootStrap: library
+From: nucci/default/turbo_seti:latest
+
+%post
+    export PATH=/usr/local/miniconda/bin:${PATH}
+    export LD_LIBRARY_PATH=/usr/local/miniconda/lib:${LD_LIBRARY_PATH}
+    export LC_ALL=en_US.utf8
+    export LANG=en_US.utf8
+    #---------- Write your code here ----------#
+
+%environment
+    export PATH=/usr/local/miniconda/bin:${PATH}
+    export LD_LIBRARY_PATH=/usr/local/miniconda/lib:${LD_LIBRARY_PATH}
+    export LC_ALL=en_US.utf8
+    export LANG=en_US.utf8
+
+    #---------- Write your code here ----------#
