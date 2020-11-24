@@ -5,7 +5,7 @@ From: debian:9
     Author: Jason C. Nucciarone
     Maintainer: Jason C. Nucciarone
     Owner: Jason C. Nucciarone
-    Version: v1.0
+    Version: v1.2
 
 %post
     ## Update repository list
