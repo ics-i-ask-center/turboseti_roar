@@ -1,0 +1,82 @@
+BootStrap: docker
+From: debian:9
+
+%labels
+    Author: Jason C. Nucciarone
+    Maintainer: Jason C. Nucciarone
+    Owner: Jason C. Nucciarone
+    Version: v1.0
+
+%post
+    ## Update repository list
+    apt-get update -y
+    
+    ## Install my essentials
+    apt-get install build-essential wget curl file git libreadline7 \
+        gdebi-core locales-all moreutils parallel -y
+
+    ## Install miniconda3
+    if [ ! -d /usr/local/miniconda3 ]; then
+        wget http://10.1.10.2/sh_installers/miniconda3/miniconda3-4.8.4-linux-x86_64.sh \
+            -O ~/miniconda3.sh && \
+        bash ~/miniconda3.sh -b -p /usr/local/miniconda && \
+        rm -rf ~/miniconda3
+    fi
+
+    ## Initialize environment and update conda
+    export PATH=/usr/local/miniconda/bin:${PATH}
+    export LD_LIBRARY_PATH=/usr/local/miniconda/lib:${LD_LIBRARY_PATH}
+    conda update conda
+
+    ## Set language for firefox
+    export LC_ALL=en_US.utf8
+    export LANG=en_US.utf8
+
+    ## Graphical libraries needed to open on Roar
+    apt-get install libcanberra-gtk-module libcanberra-gtk3-module -y
+
+    ## Install firefox for jupyter
+    apt-get install firefox-esr -y
+
+    ## Install blimpy and turbo_seti dependencies
+    conda install -c conda-forge numpy -y
+    conda install -c conda-forge h5py -y
+    conda install -c conda-forge astropy -y
+    conda install -c conda-forge scipy -y
+    conda install -c conda-forge matplotlib -y
+    conda install -c conda-forge hdf5plugin -y
+    conda install -c conda-forge cython -y
+    conda install -c conda-forge dask -y
+    conda install -c conda-forge notebook -y
+
+    ## Install blimpy using pip
+    pip install blimpy
+
+    ## Install turbo_seti
+    git clone https://github.com/UCBerkeleySETI/turbo_seti.git
+    cd turbo_seti && \
+        pip install -r requirements.txt && \
+        pip install .
+
+    ## Bind mounts for Roar
+    mkdir -p /storage/home
+    mkdir -p /storage/work
+    mkdir -p /gpfs/scratch
+    mkdir -p /gpfs/group
+    mkdir -p /var/spool/torque
+
+    ## Free up some space
+    cd .. && \
+        rm -rf turbo_seti && \
+        conda clean --all -y
+
+%environment
+    export PATH=/usr/local/miniconda/bin:${PATH}
+    export LD_LIBRARY_PATH=/usr/local/miniconda/lib:${LD_LIBRARY_PATH}
+    export LC_ALL=en_US.utf8
+    export LANG=en_US.utf8
+
+%help
+    If you have any questions or issues regarding
+    the use of this container then please contact
+    the ICDS-iASK center at iask@ics.psu.edu
